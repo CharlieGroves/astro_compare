@@ -40,110 +40,103 @@ function App() {
 	}, [shutterSpeed_1, shutterSpeed_2, apeture_1, apeture_2, ISO_1, ISO_2]);
 
 	return (
-		<>
-			<div>
-				<div id="stars"></div>
-				<div id="stars2"></div>
-				<div id="stars3"></div>
-			</div>
-			<div className="App">
-				<header>Astro Compare</header>
-				<form id="exposures-container">
-					<div className="exposure-1">
-						<label htmlFor="shutterSpeed_1">
-							Shutter Speed
-							<input
-								value={shutterSpeed_1}
-								onChange={(e) =>
-									setshutterSpeed_1(e.target.value)
-								}
-								type="text"
-							/>
-						</label>
-						<label htmlFor="apeture_1">
-							Apeture
-							<select
-								onChange={(e) => setApeture_1(e.target.value)}
-								name="apeture_1"
-								id="apeture_1"
-							>
-								<option value="1.4">1.4</option>
-								<option value="1.8">1.8</option>
-								<option value="2.8">2.8</option>
-								<option value="4">4</option>
-								<option value="5.6">5.6</option>
-								<option value="8">8</option>
-								<option value="11">11</option>
-								<option value="16">16</option>
-								<option value="22">22</option>
-							</select>
-						</label>
-						<label htmlFor="ISO_1">
-							ISO
-							<input
-								value={ISO_1}
-								onChange={(e) => setISO_1(e.target.value)}
-								type="text"
-							/>
-						</label>
-					</div>
-					<br />
-					<div className="exposure-2">
-						<label htmlFor="shutterSpeed_2">
-							Shutter Speed
-							<input
-								value={shutterSpeed_2}
-								onChange={(e) =>
-									setshutterSpeed_2(e.target.value)
-								}
-								type="text"
-							/>
-						</label>
-						<label htmlFor="apeture_2">
-							Apeture
-							<select
-								onChange={(e) => setApeture_2(e.target.value)}
-								name="apeture_2"
-								id="apeture_2"
-							>
-								<option value="1.4">1.4</option>
-								<option value="1.8">1.8</option>
-								<option value="2.8">2.8</option>
-								<option value="4">4</option>
-								<option value="5.6">5.6</option>
-								<option value="8">8</option>
-								<option value="11">11</option>
-								<option value="16">16</option>
-								<option value="22">22</option>
-							</select>
-						</label>
-						<label htmlFor="ISO_2">
-							ISO
-							<input
-								value={ISO_2}
-								onChange={(e) => setISO_2(e.target.value)}
-								type="text"
-							/>
-						</label>
-					</div>
-				</form>
-				<div>Exposure 1: {exposure_1} second iso per f-stop</div>
-				<div>Exposure 2: {exposure_2} second iso per f-stop</div>
+		<div className="App">
+			<header>
+				<h1>Astro Compare</h1>
+			</header>
+			<form id="exposures-container">
+				<div className="exposure-1">
+					<label htmlFor="shutterSpeed_1">
+						Shutter Speed
+						<input
+							value={shutterSpeed_1}
+							onChange={(e) => setshutterSpeed_1(e.target.value)}
+							type="text"
+						/>
+					</label>
+					<label htmlFor="apeture_1">
+						Apeture
+						<select
+							onChange={(e) => setApeture_1(e.target.value)}
+							name="apeture_1"
+							id="apeture_1"
+						>
+							<option value="1.4">1.4</option>
+							<option value="1.8">1.8</option>
+							<option value="2.8">2.8</option>
+							<option value="4">4</option>
+							<option value="5.6">5.6</option>
+							<option value="8">8</option>
+							<option value="11">11</option>
+							<option value="16">16</option>
+							<option value="22">22</option>
+						</select>
+					</label>
+					<label htmlFor="ISO_1">
+						ISO
+						<input
+							value={ISO_1}
+							onChange={(e) => setISO_1(e.target.value)}
+							type="text"
+						/>
+					</label>
+				</div>
+				<br />
+				<div className="exposure-2">
+					<label htmlFor="shutterSpeed_2">
+						Shutter Speed
+						<input
+							value={shutterSpeed_2}
+							onChange={(e) => setshutterSpeed_2(e.target.value)}
+							type="text"
+						/>
+					</label>
+					<label htmlFor="apeture_2">
+						Apeture
+						<select
+							onChange={(e) => setApeture_2(e.target.value)}
+							name="apeture_2"
+							id="apeture_2"
+						>
+							<option value="1.4">1.4</option>
+							<option value="1.8">1.8</option>
+							<option value="2.8">2.8</option>
+							<option value="4">4</option>
+							<option value="5.6">5.6</option>
+							<option value="8">8</option>
+							<option value="11">11</option>
+							<option value="16">16</option>
+							<option value="22">22</option>
+						</select>
+					</label>
+					<label htmlFor="ISO_2">
+						ISO
+						<input
+							value={ISO_2}
+							onChange={(e) => setISO_2(e.target.value)}
+							type="text"
+						/>
+					</label>
+				</div>
+			</form>
+			<div id="exp-1">Exposure 1: {exposure_1} second iso per f-stop</div>
+			<div id="exp-2">Exposure 2: {exposure_2} second iso per f-stop</div>
+			<div id="compare">
 				{exposure_1 === exposure_2 ? (
 					<>Exposure 1 and exposure 2 are equal</>
 				) : exposure_1 >= exposure_2 ? (
 					<>
-						Exposure 1 is {(Math.log2(exposure_1 / exposure_2))}{" "}
-						stops brighter than exposure 2
+						Exposure 1 is {Math.log2(exposure_1 / exposure_2)} stops
+						brighter than exposure 2
 					</>
 				) : (
 					<>
-						Exposure 2 is {(Math.log2(exposure_2 / exposure_1))}{" "}
-						stops brighter than exposure 1
+						Exposure 2 is {Math.log2(exposure_2 / exposure_1)} stops
+						brighter than exposure 1
 					</>
 				)}
 			</div>
-		</>
+		</div>
 	);
 }
 

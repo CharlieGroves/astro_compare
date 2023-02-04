@@ -1,6 +1,13 @@
 .App {
-  /* color: white */
-  /* display: flex; */
+  margin-left: 1rem;
+}
+
+label, #exp-1, #exp-2 {
+  margin-bottom: 0.5rem;
+}
+
+input, select {
+  margin-left: 0.5rem;
 }
 
 .exposure-1, .exposure-2 {
@@ -8,15 +15,10 @@
   flex-direction: column;
 }
 
-.exposure-1 {
-  margin-left: 10rem;
+#exp-1, #exp-2, #compare {
+  font-size: large;
 }
 
-.exposure-2 {
-  margin-right: 10rem;
-}
-
-#exposures-container {
-  display: flex;
-  justify-content: space-between;
+#compare {
+  font-weight: bold;
 }
