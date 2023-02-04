@@ -1,4 +1,5 @@
 .App {
+  /* color: white */
   /* display: flex; */
 }
 
@@ -7,6 +8,15 @@
   flex-direction: column;
 }
 
-.exposure-2 {
+.exposure-1 {
+  margin-left: 10rem;
+}
 
+.exposure-2 {
+  margin-right: 10rem;
+}
+
+#exposures-container {
+  display: flex;
+  justify-content: space-between;
 }
