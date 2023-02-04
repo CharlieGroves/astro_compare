@@ -8,6 +8,7 @@ label, #exp-1, #exp-2 {
 
 input, select {
   margin-left: 0.5rem;
+  font-size: 20px;
 }
 
 .exposure-1, .exposure-2 {
