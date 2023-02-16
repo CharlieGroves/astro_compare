@@ -3,35 +3,36 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
+	const base = 2;
 	const relative_apeture_dict = {
-		1.0: 2^0,
-		1.1: 2^(1/3),
-		1.2: 2^(2/3),
-		1.4: 2^1,
-		1.6: 2^(1 + 1/3),
-		1.8: 2^(1 + 2/3),
-		2: 2^2,
-		2.2: 2^(2 + 1/3),
-		2.5: 2^(2 + 2/3),
-		2.8: 2^3,
-		3.2: 2^(3 + 1/3),
-		3.5: 2^(3 + 2/3),
-		4: 2^4,
-		4.5: 2^(4 + 1/3),
-		5: 2^(4 + 2/3),
-		5.6: 2^5,
-		6.3: 2^(5 + 1/3),
-		7.1: 2^(5 + 2/3),
-		8: 2^6,
-		9: 2^(6 + 1/3),
-		10: 2^(6 + 2/3),
-		11: 2^7,
-		13: 2^(7 + 1/3),
-		14: 2^(7 + 2/3),
-		16: 2^8,
-		18: 2^(8 + 1/3),
-		20: 2^(8 + 2/3),
-		22: 2^9,
+		"1.0": Math.pow(base, 0),
+		1.1: Math.pow(base, 1 / 3),
+		1.2: Math.pow(base, 2 / 3),
+		1.4: Math.pow(base, 1),
+		1.6: Math.pow(base, 1 + 1 / 3),
+		1.8: Math.pow(base, 1 + 2 / 3),
+		"2.0": Math.pow(base, 2),
+		2.2: Math.pow(base, 2 + 1 / 3),
+		2.5: Math.pow(base, 2 + 2 / 3),
+		2.8: Math.pow(base, 3),
+		3.2: Math.pow(base, 3 + 1 / 3),
+		3.5: Math.pow(base, 3 + 2 / 3),
+		"4.0": Math.pow(base, 4),
+		4.5: Math.pow(base, 4 + 1 / 3),
+		"5.0": Math.pow(base, 4 + 2 / 3),
+		5.6: Math.pow(base, 5),
+		6.3: Math.pow(base, 5 + 1 / 3),
+		7.1: Math.pow(base, 5 + 2 / 3),
+		"8.0": Math.pow(base, 6),
+		"9.0": Math.pow(base, 6 + 1 / 3),
+		"10.0": Math.pow(base, 6 + 2 / 3),
+		"11.0": Math.pow(base, 7),
+		"13.0": Math.pow(base, 7 + 1 / 3),
+		"14.0": Math.pow(base, 7 + 2 / 3),
+		"16.0": Math.pow(base, 8),
+		"18.0": Math.pow(base, 8 + 1 / 3),
+		"20.0": Math.pow(base, 8 + 2 / 3),
+		"22.0": Math.pow(base, 9),
 	};
 
 	const [exposure_1, setExposure_1] = useState(0);
@@ -80,15 +81,11 @@ function App() {
 							name="apeture_1"
 							id="apeture_1"
 						>
-							<option value="1.4">1.4</option>
-							<option value="1.8">1.8</option>
-							<option value="2.8">2.8</option>
-							<option value="4">4</option>
-							<option value="5.6">5.6</option>
-							<option value="8">8</option>
-							<option value="11">11</option>
-							<option value="16">16</option>
-							<option value="22">22</option>
+							{Object.entries(relative_apeture_dict).map(
+								([key]) => {
+									return <option value={key}>{key}</option>;
+								}
+							)}
 						</select>
 					</label>
 					<label htmlFor="ISO_1">
@@ -117,15 +114,11 @@ function App() {
 							name="apeture_2"
 							id="apeture_2"
 						>
-							<option value="1.4">1.4</option>
-							<option value="1.8">1.8</option>
-							<option value="2.8">2.8</option>
-							<option value="4">4</option>
-							<option value="5.6">5.6</option>
-							<option value="8">8</option>
-							<option value="11">11</option>
-							<option value="16">16</option>
-							<option value="22">22</option>
+							{Object.entries(relative_apeture_dict).map(
+								([key]) => {
+									return <option value={key}>{key}</option>;
+								}
+							)}
 						</select>
 					</label>
 					<label htmlFor="ISO_2">
