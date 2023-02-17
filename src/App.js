@@ -89,6 +89,7 @@ function App() {
 				<form id="exposures-container">
 					<div className="toggle-container">
 						<ToggleSlider
+							draggable={false}
 							barHeight={39}
 							barWidth={72}
 							barBackgroundColor="grey"

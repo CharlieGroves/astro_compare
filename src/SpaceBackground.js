@@ -1,4 +1,4 @@
-import { startTransition, useEffect } from 'react';
+import { useEffect } from 'react';
 
 function SpaceBackground() {
   useEffect(() => {
