@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$1"]
+if [ -z "$1" ]
 then
     echo "You must provide a commit message. Usage: ./deploy <commit message>"
     exit 1
