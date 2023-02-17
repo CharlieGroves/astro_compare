@@ -1,25 +1,56 @@
-.App {
-  margin-left: 1rem;
+header {
+	text-align: center;
 }
 
-label, #exp-1, #exp-2 {
-  margin-bottom: 0.5rem;
+.body-container {
+	display: block;
+	text-align: center;
 }
 
-input, select {
-  margin-left: 0.5rem;
-  font-size: 20px;
+.body-container > form {
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
 }
 
-.exposure-1, .exposure-2 {
-  display: flex;
-  flex-direction: column;
+label,
+#exp-1,
+#exp-2 {
+	margin-bottom: 0.5rem;
 }
 
-#exp-1, #exp-2, #compare {
-  font-size: large;
+input,
+select {
+	margin-left: 0.5rem;
+	font-size: 20px;
+}
+
+.exposure-1,
+.exposure-2 {
+	display: flex;
+	flex-direction: column;
+}
+
+#exp-1,
+#exp-2,
+#compare {
+	font-size: large;
 }
 
 #compare {
-  font-weight: bold;
+	font-weight: bold;
+}
+
+input {
+	padding: 3px 5px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	/* margin-left: 0.5rem; */
+	margin-left: 0.5rem;
+	right: 0.5rem;
+	position: relative;
 }

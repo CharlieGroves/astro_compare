@@ -1,5 +1,4 @@
 import "./App.css";
-// import "./stars.css";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -64,89 +63,114 @@ function App() {
 			<header>
 				<h1>Astro Compare</h1>
 			</header>
-			<form id="exposures-container">
-				<div className="exposure-1">
-					<label htmlFor="shutterSpeed_1">
-						Shutter Speed
-						<input
-							value={shutterSpeed_1}
-							onChange={(e) => setshutterSpeed_1(e.target.value)}
-							type="text"
-						/>
-					</label>
-					<label htmlFor="apeture_1">
-						Apeture
-						<select
-							onChange={(e) => setApeture_1(e.target.value)}
-							name="apeture_1"
-							id="apeture_1"
-						>
-							{Object.entries(relative_apeture_dict).map(
-								([key]) => {
-									return <option value={key}>{key}</option>;
+			<div className="body-container">
+				<form id="exposures-container">
+					<div className="exposure-1">
+						<h3>Exposure 1</h3>
+						<label htmlFor="shutterSpeed_1">
+							Shutter Speed
+							<br />
+							<input
+								value={shutterSpeed_1}
+								onChange={(e) =>
+									setshutterSpeed_1(e.target.value)
 								}
-							)}
-						</select>
-					</label>
-					<label htmlFor="ISO_1">
-						ISO
-						<input
-							value={ISO_1}
-							onChange={(e) => setISO_1(e.target.value)}
-							type="text"
-						/>
-					</label>
-				</div>
+								type="text"
+							/>
+						</label>
+						
+						<label htmlFor="ISO_1">
+							ISO
+							<br />
+							<input
+								value={ISO_1}
+								onChange={(e) => setISO_1(e.target.value)}
+								type="text"
+							/>
+						</label>
+						<label htmlFor="apeture_1">
+							Apeture
+							<select
+								onChange={(e) => setApeture_1(e.target.value)}
+								name="apeture_1"
+								id="apeture_1"
+							>
+								{Object.entries(relative_apeture_dict).map(
+									([key]) => {
+										return (
+											<option value={key}>{key}</option>
+										);
+									}
+								)}
+							</select>
+						</label>
+					</div>
+					<br />
+					<div className="exposure-2">
+						<h3>Exposure 2</h3>
+						<label htmlFor="shutterSpeed_2">
+							Shutter Speed
+							<br />
+							<input
+								value={shutterSpeed_2}
+								onChange={(e) =>
+									setshutterSpeed_2(e.target.value)
+								}
+								type="text"
+							/>
+						</label>
+						
+						<label htmlFor="ISO_2">
+							ISO
+							<br />
+							<input
+								value={ISO_2}
+								onChange={(e) => setISO_2(e.target.value)}
+								type="text"
+							/>
+						</label>
+						<label htmlFor="apeture_2">
+							Apeture
+							<select
+								onChange={(e) => setApeture_2(e.target.value)}
+								name="apeture_2"
+								id="apeture_2"
+							>
+								{Object.entries(relative_apeture_dict).map(
+									([key]) => {
+										return (
+											<option value={key}>{key}</option>
+										);
+									}
+								)}
+							</select>
+						</label>
+					</div>
+				</form>
 				<br />
-				<div className="exposure-2">
-					<label htmlFor="shutterSpeed_2">
-						Shutter Speed
-						<input
-							value={shutterSpeed_2}
-							onChange={(e) => setshutterSpeed_2(e.target.value)}
-							type="text"
-						/>
-					</label>
-					<label htmlFor="apeture_2">
-						Apeture
-						<select
-							onChange={(e) => setApeture_2(e.target.value)}
-							name="apeture_2"
-							id="apeture_2"
-						>
-							{Object.entries(relative_apeture_dict).map(
-								([key]) => {
-									return <option value={key}>{key}</option>;
-								}
-							)}
-						</select>
-					</label>
-					<label htmlFor="ISO_2">
-						ISO
-						<input
-							value={ISO_2}
-							onChange={(e) => setISO_2(e.target.value)}
-							type="text"
-						/>
-					</label>
+				<br />
+				<br />
+				<div id="exp-1">
+					Exposure 1: {exposure_1} second iso per f-stop
 				</div>
-			</form>
-			<div id="exp-1">Exposure 1: {exposure_1} second iso per f-stop</div>
-			<div id="exp-2">Exposure 2: {exposure_2} second iso per f-stop</div>
-			<div id="compare">
-				{exposure_1 === exposure_2 ? (
-					<>Exposure 1 and exposure 2 are equal</>
-				) : exposure_1 >= exposure_2 ? (
-					<>
-						Exposure 1 is {Math.log2(exposure_1 / exposure_2)} stops
-						brighter than exposure 2
-					</>
-				) : (
-					<>
-						Exposure 2 is {Math.log2(exposure_2 / exposure_1)} stops
-						brighter than exposure 1
-					</>
-				)}
+				<div id="exp-2">
+					Exposure 2: {exposure_2} second iso per f-stop
+				</div>
+				<div id="compare">
+					{exposure_1 === exposure_2 ? (
+						<>Exposure 1 and exposure 2 are equal</>
+					) : exposure_1 >= exposure_2 ? (
+						<>
+							Exposure 1 is {Math.log2(exposure_1 / exposure_2)}{" "}
+							stops brighter than exposure 2
+						</>
+					) : (
+						<>
+							Exposure 2 is {Math.log2(exposure_2 / exposure_1)}{" "}
+							stops brighter than exposure 1
+						</>
+					)}
+				</div>
 			</div>
 		</div>
 	);
