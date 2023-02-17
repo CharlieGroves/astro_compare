@@ -71,6 +71,8 @@ function App() {
 			<div className="body-container">
 				<form id="exposures-container">
 					<ToggleSlider
+						barHeight={39}
+						barWidth={72}
 						barBackgroundColor="grey"
 						barBackgroundColorActive="#0076BE"
 						onToggle={(state) => setAccountExposures(state)}
