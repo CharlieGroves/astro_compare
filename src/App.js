@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import { ToggleSlider } from "react-toggle-slider";
 
 function App() {
 	const base = 2;
@@ -46,17 +47,21 @@ function App() {
 	const [ISO_1, setISO_1] = useState(0);
 	const [ISO_2, setISO_2] = useState(0);
 
+	const [accountExposures, setAccountExposures] = useState(false);
+	const [numberOfExposures_1, setNumberOfExposures_1] = useState(1);
+	const [numberOfExposures_2, setNumberOfExposures_2] = useState(1);
+
 	useEffect(() => {
 		let temp_exposure_1 =
-			(shutterSpeed_1 / relative_apeture_dict[apeture_1]) * ISO_1;
+			(shutterSpeed_1 / relative_apeture_dict[apeture_1]) * ISO_1 * numberOfExposures_1;
 		let temp_exposure_2 =
-			(shutterSpeed_2 / relative_apeture_dict[apeture_2]) * ISO_2;
+			(shutterSpeed_2 / relative_apeture_dict[apeture_2]) * ISO_2 * numberOfExposures_2;
 
 		setExposure_1(temp_exposure_1);
 		setExposure_2(temp_exposure_2);
 
 		return;
-	}, [shutterSpeed_1, shutterSpeed_2, apeture_1, apeture_2, ISO_1, ISO_2]);
+	}, [shutterSpeed_1, shutterSpeed_2, apeture_1, apeture_2, ISO_1, ISO_2, numberOfExposures_1, numberOfExposures_2]);
 
 	return (
 		<div className="App">
@@ -65,6 +70,11 @@ function App() {
 			</header>
 			<div className="body-container">
 				<form id="exposures-container">
+					<ToggleSlider
+						barBackgroundColor="grey"
+						barBackgroundColorActive="#0076BE"
+						onToggle={(state) => setAccountExposures(state)}
+					/>
 					<div className="exposure-1">
 						<h3>Exposure 1</h3>
 						<label htmlFor="shutterSpeed_1">
@@ -78,7 +88,6 @@ function App() {
 								type="text"
 							/>
 						</label>
-						
 						<label htmlFor="ISO_1">
 							ISO
 							<br />
@@ -88,6 +97,19 @@ function App() {
 								type="text"
 							/>
 						</label>
+						{accountExposures && (
+							<label htmlFor="numberOfExposures_1">
+								No. Lights
+								<br />
+								<input
+									value={numberOfExposures_1}
+									onChange={(e) =>
+										setNumberOfExposures_1(e.target.value)
+									}
+									type="text"
+								/>
+							</label>
+						)}
 						<label htmlFor="apeture_1">
 							Apeture
 							<select
@@ -119,7 +141,7 @@ function App() {
 								type="text"
 							/>
 						</label>
-						
+
 						<label htmlFor="ISO_2">
 							ISO
 							<br />
@@ -129,6 +151,19 @@ function App() {
 								type="text"
 							/>
 						</label>
+						{accountExposures && (
+							<label htmlFor="numberOfExposures_2">
+								No. Lights
+								<br />
+								<input
+									value={numberOfExposures_2}
+									onChange={(e) =>
+										setNumberOfExposures_2(e.target.value)
+									}
+									type="text"
+								/>
+							</label>
+						)}
 						<label htmlFor="apeture_2">
 							Apeture
 							<select
