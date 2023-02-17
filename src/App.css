@@ -49,8 +49,18 @@ input {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
-	/* margin-left: 0.5rem; */
 	margin-left: 0.5rem;
 	right: 0.5rem;
 	position: relative;
+}
+
+.toggle-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.toggle-label {
+	margin-left: 0.5rem;
+	font-weight: bold;
 }

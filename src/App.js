@@ -53,15 +53,28 @@ function App() {
 
 	useEffect(() => {
 		let temp_exposure_1 =
-			(shutterSpeed_1 / relative_apeture_dict[apeture_1]) * ISO_1 * numberOfExposures_1;
+			(shutterSpeed_1 / relative_apeture_dict[apeture_1]) *
+			ISO_1 *
+			numberOfExposures_1;
 		let temp_exposure_2 =
-			(shutterSpeed_2 / relative_apeture_dict[apeture_2]) * ISO_2 * numberOfExposures_2;
+			(shutterSpeed_2 / relative_apeture_dict[apeture_2]) *
+			ISO_2 *
+			numberOfExposures_2;
 
 		setExposure_1(temp_exposure_1);
 		setExposure_2(temp_exposure_2);
 
 		return;
-	}, [shutterSpeed_1, shutterSpeed_2, apeture_1, apeture_2, ISO_1, ISO_2, numberOfExposures_1, numberOfExposures_2]);
+	}, [
+		shutterSpeed_1,
+		shutterSpeed_2,
+		apeture_1,
+		apeture_2,
+		ISO_1,
+		ISO_2,
+		numberOfExposures_1,
+		numberOfExposures_2,
+	]);
 
 	return (
 		<div className="App">
@@ -70,13 +83,16 @@ function App() {
 			</header>
 			<div className="body-container">
 				<form id="exposures-container">
-					<ToggleSlider
-						barHeight={39}
-						barWidth={72}
-						barBackgroundColor="grey"
-						barBackgroundColorActive="#0076BE"
-						onToggle={(state) => setAccountExposures(state)}
-					/>
+					<div className="toggle-container">
+						<ToggleSlider
+							barHeight={39}
+							barWidth={72}
+							barBackgroundColor="grey"
+							barBackgroundColorActive="#0076BE"
+							onToggle={(state) => setAccountExposures(state)}
+						/>
+						<div className="toggle-label">Multiple Exposures</div>
+					</div>
 					<div className="exposure-1">
 						<h3>Exposure 1</h3>
 						<label htmlFor="shutterSpeed_1">
