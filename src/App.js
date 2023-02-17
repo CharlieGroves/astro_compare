@@ -215,12 +215,24 @@ function App() {
 					) : exposure_1 >= exposure_2 ? (
 						<>
 							Exposure 1 is {Math.log2(exposure_1 / exposure_2)}{" "}
-							stops brighter than exposure 2
+							{console.log(Math.log2(exposure_1 / exposure_2))}
+							{exposure_1 == exposure_2 * 2 ? (
+								<>stop</>
+							) : (
+								<>stops</>
+							)}{" "}
+							brighter than exposure 2
 						</>
 					) : (
 						<>
 							Exposure 2 is {Math.log2(exposure_2 / exposure_1)}{" "}
-							stops brighter than exposure 1
+							
+							{exposure_2 == exposure_1 * 2 ? (
+								<>stop</>
+							) : (
+								<>stops</>
+							)}{" "}
+							brighter than exposure 1
 						</>
 					)}
 				</div>
