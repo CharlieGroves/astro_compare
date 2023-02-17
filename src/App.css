@@ -5,6 +5,7 @@ header {
 .body-container {
 	display: block;
 	text-align: center;
+	z-index: 0;
 }
 
 .body-container > form {

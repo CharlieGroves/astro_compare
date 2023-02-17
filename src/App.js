@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { ToggleSlider } from "react-toggle-slider";
+import SpaceBackground from "./SpaceBackground";
 
 function App() {
 	const base = 2;
@@ -65,6 +66,7 @@ function App() {
 		setExposure_2(temp_exposure_2);
 
 		return;
+		// eslint-disable-next-line
 	}, [
 		shutterSpeed_1,
 		shutterSpeed_2,
@@ -78,9 +80,11 @@ function App() {
 
 	return (
 		<div className="App">
+
 			<header>
 				<h1>Astro Compare</h1>
 			</header>
+			<SpaceBackground />
 			<div className="body-container">
 				<form id="exposures-container">
 					<div className="toggle-container">
@@ -216,7 +220,7 @@ function App() {
 						<>
 							Exposure 1 is {Math.log2(exposure_1 / exposure_2)}{" "}
 							{console.log(Math.log2(exposure_1 / exposure_2))}
-							{exposure_1 == exposure_2 * 2 ? (
+							{exposure_1 === exposure_2 * 2 ? (
 								<>stop</>
 							) : (
 								<>stops</>
@@ -226,8 +230,7 @@ function App() {
 					) : (
 						<>
 							Exposure 2 is {Math.log2(exposure_2 / exposure_1)}{" "}
-							
-							{exposure_2 == exposure_1 * 2 ? (
+							{exposure_2 === exposure_1 * 2 ? (
 								<>stop</>
 							) : (
 								<>stops</>
@@ -239,6 +242,7 @@ function App() {
 			</div>
 			<br />
 			<br />
+
 		</div>
 	);
 }
