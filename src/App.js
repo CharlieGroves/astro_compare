@@ -6,34 +6,34 @@ import SpaceBackground from "./SpaceBackground";
 function App() {
 	const base = 2;
 	const relative_apeture_dict = {
-		"1.0": Math.pow(base, 0),
-		1.1: Math.pow(base, 1 / 3),
-		1.2: Math.pow(base, 2 / 3),
-		1.4: Math.pow(base, 1),
-		1.6: Math.pow(base, 1 + 1 / 3),
-		1.8: Math.pow(base, 1 + 2 / 3),
-		"2.0": Math.pow(base, 2),
-		2.2: Math.pow(base, 2 + 1 / 3),
-		2.5: Math.pow(base, 2 + 2 / 3),
-		2.8: Math.pow(base, 3),
-		3.2: Math.pow(base, 3 + 1 / 3),
-		3.5: Math.pow(base, 3 + 2 / 3),
-		"4.0": Math.pow(base, 4),
-		4.5: Math.pow(base, 4 + 1 / 3),
-		"5.0": Math.pow(base, 4 + 2 / 3),
-		5.6: Math.pow(base, 5),
-		6.3: Math.pow(base, 5 + 1 / 3),
-		7.1: Math.pow(base, 5 + 2 / 3),
-		"8.0": Math.pow(base, 6),
-		"9.0": Math.pow(base, 6 + 1 / 3),
-		"10.0": Math.pow(base, 6 + 2 / 3),
-		"11.0": Math.pow(base, 7),
-		"13.0": Math.pow(base, 7 + 1 / 3),
-		"14.0": Math.pow(base, 7 + 2 / 3),
-		"16.0": Math.pow(base, 8),
-		"18.0": Math.pow(base, 8 + 1 / 3),
-		"20.0": Math.pow(base, 8 + 2 / 3),
-		"22.0": Math.pow(base, 9),
+		"1.0": base ** 0,
+		1.1: base ** (1 / 3),
+		1.2: base ** (2 / 3),
+		1.4: base ** 1,
+		1.6: base ** (1 + 1 / 3),
+		1.8: base ** (1 + 2 / 3),
+		"2.0": base ** 2,
+		2.2: base ** (2 + 1 / 3),
+		2.5: base ** (2 + 2 / 3),
+		2.8: base ** 3,
+		3.2: base ** (3 + 1 / 3),
+		3.5: base ** (3 + 2 / 3),
+		"4.0": base ** 4,
+		4.5: base ** (4 + 1 / 3),
+		"5.0": base ** (4 + 2 / 3),
+		5.6: base ** 5,
+		6.3: base ** (5 + 1 / 3),
+		7.1: base ** (5 + 2 / 3),
+		"8.0": base ** 6,
+		"9.0": base ** (6 + 1 / 3),
+		"10.0": base ** (6 + 2 / 3),
+		"11.0": base ** 7,
+		"13.0": base ** (7 + 1 / 3),
+		"14.0": base ** (7 + 2 / 3),
+		"16.0": base ** 8,
+		"18.0": base ** (8 + 1 / 3),
+		"20.0": base ** (8 + 2 / 3),
+		"22.0": base ** 9,
 	};
 
 	const [exposure_1, setExposure_1] = useState(0);
@@ -53,11 +53,11 @@ function App() {
 	const [numberOfExposures_2, setNumberOfExposures_2] = useState(1);
 
 	useEffect(() => {
-		let temp_exposure_1 =
+		const temp_exposure_1 =
 			(shutterSpeed_1 / relative_apeture_dict[apeture_1]) *
 			ISO_1 *
 			numberOfExposures_1;
-		let temp_exposure_2 =
+		const temp_exposure_2 =
 			(shutterSpeed_2 / relative_apeture_dict[apeture_2]) *
 			ISO_2 *
 			numberOfExposures_2;
@@ -65,7 +65,6 @@ function App() {
 		setExposure_1(temp_exposure_1);
 		setExposure_2(temp_exposure_2);
 
-		return;
 		// eslint-disable-next-line
 	}, [
 		shutterSpeed_1,
@@ -80,7 +79,6 @@ function App() {
 
 	return (
 		<div className="App">
-
 			<header>
 				<h1>Astro Compare</h1>
 			</header>
@@ -141,11 +139,9 @@ function App() {
 								id="apeture_1"
 							>
 								{Object.entries(relative_apeture_dict).map(
-									([key]) => {
-										return (
-											<option value={key}>{key}</option>
-										);
-									}
+									([key]) => (
+										<option value={key}>{key}</option>
+									)
 								)}
 							</select>
 						</label>
@@ -195,11 +191,9 @@ function App() {
 								id="apeture_2"
 							>
 								{Object.entries(relative_apeture_dict).map(
-									([key]) => {
-										return (
-											<option value={key}>{key}</option>
-										);
-									}
+									([key]) => (
+										<option value={key}>{key}</option>
+									)
 								)}
 							</select>
 						</label>
@@ -243,7 +237,6 @@ function App() {
 			</div>
 			<br />
 			<br />
-
 		</div>
 	);
 }
