@@ -84,7 +84,7 @@ function SpaceBackground() {
 				shootingStar.remove();
 			};
 		}, 10000);
-	});
+	}, []);
 	return <div className="background" ref={containerRef}></div>;
 }
 

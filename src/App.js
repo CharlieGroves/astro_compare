@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Buttons.css";
 import { useState, useEffect } from "react";
 import { ToggleSlider } from "react-toggle-slider";
 import SpaceBackground from "./SpaceBackground";
@@ -76,6 +77,13 @@ function App() {
 		numberOfExposures_1,
 		numberOfExposures_2,
 	]);
+
+	const [matchError, setMatchError] = useState("");
+
+	const matchExposures = () => {
+		setNumberOfExposures_2(exposure_1 / shutterSpeed_2 / ISO_2 * relative_apeture_dict[apeture_2])
+		console.log("matched");
+	};
 
 	return (
 		<div className="App">
@@ -200,6 +208,16 @@ function App() {
 					</div>
 				</form>
 				<br />
+				<br />
+				{matchError && <div>{matchError}</div>}
+				{accountExposures && (
+					<button
+						onClick={matchExposures}
+						className="match-exposures-button"
+					>
+						Match Exposures
+					</button>
+				)}
 				<br />
 				<br />
 				<div id="exp-1">
