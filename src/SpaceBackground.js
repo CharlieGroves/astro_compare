@@ -1,21 +1,27 @@
-import { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import "./SpaceBackground.css";
 
 function SpaceBackground() {
+	const containerRef = useRef(null);
+	const starColors = ["#ffffff", "#f5f5f5", "#eeeeee"];
+	const satelliteColors = ["#ffffff", "#f5f5f5", "#eeeeee"];
+	const trailColors = ["#ffffff", "#f5f5f5", "#eeeeee"];
+
 	useEffect(() => {
-		const container = document.querySelector(".background");
+		const container = containerRef.current;
+		const width = container.offsetWidth;
+		const height = container.offsetHeight;
+
+		// Add stars
 		for (let i = 0; i < 50; i++) {
 			const star = document.createElement("div");
 			star.classList.add("star");
-			star.style.top = `${Math.random() * 100}%`;
-			star.style.left = `${Math.random() * 100}%`;
-			star.style.color = "white";
-			star.style.backgroundColor = "white";
-			star.style.position = "absolute";
-			star.style.width = "1px";
-			star.style.height = "1px";
-			star.style.zIndex = "10";
+			star.style.top = `${Math.random() * height}px`;
+			star.style.left = `${Math.random() * width}px`;
 			container.appendChild(star);
 		}
+
+		// Add star clusters
 		for (let i = 0; i < 5; i++) {
 			const cluster = document.createElement("div");
 			cluster.classList.add("star-cluster");
@@ -39,9 +45,47 @@ function SpaceBackground() {
 				cluster.appendChild(star);
 			}
 		}
-	}, []);
+		// Create shooting stars
+		setInterval(() => {
+			const shootingStar = document.createElement("div");
+			shootingStar.classList.add("shooting-star");
+			shootingStar.style.top = `${Math.random() * 100}%`;
+			shootingStar.style.left = "-5%";
+			shootingStar.style.zIndex = "10";
 
-	return <div className="background"></div>;
+			shootingStar.style.width = "20px";
+			shootingStar.style.height = "20px";
+			shootingStar.style.position = "absolute";
+			shootingStar.style.backgroundColor =
+				satelliteColors[
+					Math.floor(Math.random() * satelliteColors.length)
+				];
+			container.appendChild(shootingStar);
+
+			const trail = document.createElement("div");
+			trail.classList.add("trail");
+			trail.style.backgroundColor =
+				trailColors[Math.floor(Math.random() * trailColors.length)];
+			shootingStar.appendChild(trail);
+
+			const animation = shootingStar.animate(
+				[
+					{ transform: "translateX(0)" },
+					{ transform: "translateX(110%)" },
+				],
+				{
+					duration: Math.random() * 3000 + 2000,
+					easing: "linear",
+					delay: Math.random() * 5000,
+				}
+			);
+
+			animation.onfinish = () => {
+				shootingStar.remove();
+			};
+		}, 10000);
+	});
+	return <div className="background" ref={containerRef}></div>;
 }
 
 export default SpaceBackground;
