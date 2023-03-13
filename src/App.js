@@ -107,7 +107,7 @@ function App() {
 					<div className="exposure-1">
 						<h3>Exposure 1</h3>
 						<label htmlFor="shutterSpeed_1">
-							Shutter Speed
+							Shutter Speed1
 							<br />
 							<input
 								value={shutterSpeed_1}
