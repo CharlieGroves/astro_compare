@@ -1,14 +1,12 @@
 .match-exposures-button {
-    border: none;
-    border-radius: 0.5rem;
-    height: 50px;
-    width: 120px;
-    font-size: large;
-    box-shadow: none;
-    background-color: #0076be;
+	border: none;
+	border-radius: 0.5rem;
+	padding: 10px;
+	font-size: large;
+	box-shadow: none;
+	background-color: #0076be;
 }
 
 .match-exposures-button:hover {
-    background-color: #2f99dab7;
-
+	background-color: #2f99dab7;
 }
