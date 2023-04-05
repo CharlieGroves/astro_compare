@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { ToggleSlider } from "react-toggle-slider";
 import SpaceBackground from "./SpaceBackground";
 import Auth from "./Auth";
+import firebase, { auth } from "../service/firebase";
 
 function App() {
 	const base = 2;
-	const relative_apeture_dict:any = {
+	const relative_apeture_dict: any = {
 		"1.0": base ** 0,
 		1.1: base ** (1 / 3),
 		1.2: base ** (2 / 3),
@@ -79,11 +80,22 @@ function App() {
 		numberOfExposures_2,
 	]);
 
-
 	const matchExposures = () => {
-		setNumberOfExposures_2(exposure_1 / shutterSpeed_2 / ISO_2 * relative_apeture_dict[apeture_2])
+		setNumberOfExposures_2(
+			(exposure_1 / shutterSpeed_2 / ISO_2) *
+				relative_apeture_dict[apeture_2]
+		);
 		console.log("matched");
 	};
+
+	const [user, setUser] = useState<firebase.User>();
+
+	useEffect(() => {
+		firebase.auth().onAuthStateChanged((user) => {
+			setUser(user!);
+			console.log(user);
+		});
+	}, []);
 
 	return (
 		<div className="App">
@@ -91,7 +103,20 @@ function App() {
 				<h1>Astro Compare</h1>
 			</header>
 			<SpaceBackground />
-			<Auth />
+			{!user ? (
+				<Auth />
+			) : (
+				<>
+					<div>{user.displayName}</div>
+					<div>{user.email}</div>
+					<button
+						className="button signout"
+						onClick={() => auth.signOut()}
+					>
+						Sign out
+					</button>
+				</>
+			)}
 			<div className="body-container">
 				<form id="exposures-container">
 					<div className="toggle-container">
@@ -123,7 +148,9 @@ function App() {
 							<br />
 							<input
 								value={ISO_1}
-								onChange={(e) => setISO_1(Number(e.target.value))}
+								onChange={(e) =>
+									setISO_1(Number(e.target.value))
+								}
 								type="text"
 							/>
 						</label>
@@ -134,7 +161,9 @@ function App() {
 								<input
 									value={numberOfExposures_1}
 									onChange={(e) =>
-										setNumberOfExposures_1(Number(e.target.value))
+										setNumberOfExposures_1(
+											Number(e.target.value)
+										)
 									}
 									type="text"
 								/>
@@ -143,7 +172,9 @@ function App() {
 						<label htmlFor="apeture_1">
 							Apeture
 							<select
-								onChange={(e) => setApeture_1(Number(e.target.value))}
+								onChange={(e) =>
+									setApeture_1(Number(e.target.value))
+								}
 								name="apeture_1"
 								id="apeture_1"
 							>
@@ -175,7 +206,9 @@ function App() {
 							<br />
 							<input
 								value={ISO_2}
-								onChange={(e) => setISO_2(Number(e.target.value))}
+								onChange={(e) =>
+									setISO_2(Number(e.target.value))
+								}
 								type="text"
 							/>
 						</label>
@@ -186,7 +219,9 @@ function App() {
 								<input
 									value={numberOfExposures_2}
 									onChange={(e) =>
-										setNumberOfExposures_2(Number(e.target.value))
+										setNumberOfExposures_2(
+											Number(e.target.value)
+										)
 									}
 									type="text"
 								/>
@@ -195,7 +230,9 @@ function App() {
 						<label htmlFor="apeture_2">
 							Apeture
 							<select
-								onChange={(e) => setApeture_2(Number(e.target.value))}
+								onChange={(e) =>
+									setApeture_2(Number(e.target.value))
+								}
 								name="apeture_2"
 								id="apeture_2"
 							>
