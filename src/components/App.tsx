@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import { ToggleSlider } from "react-toggle-slider";
 import SpaceBackground from "./SpaceBackground";
 import Auth from "./Auth";
-import firebase, { auth } from "../service/firebase";
+import { useAuth } from "../hooks/useAuth";
 
 function App() {
+	const { user, signOut } = useAuth();
+
 	const base = 2;
 	const relative_apeture_dict: any = {
 		"1.0": base ** 0,
@@ -88,15 +90,6 @@ function App() {
 		console.log("matched");
 	};
 
-	const [user, setUser] = useState<firebase.User>();
-
-	useEffect(() => {
-		firebase.auth().onAuthStateChanged((user) => {
-			setUser(user!);
-			console.log(user);
-		});
-	}, []);
-
 	return (
 		<div className="App">
 			<header>
@@ -111,7 +104,7 @@ function App() {
 					<div>{user.email}</div>
 					<button
 						className="button signout"
-						onClick={() => auth.signOut()}
+						onClick={() => signOut()}
 					>
 						Sign out
 					</button>

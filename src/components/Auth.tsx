@@ -1,10 +1,11 @@
-import React from "react";
-import { signInWithGoogle } from "../service/firebase";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Auth() {
+	const { signIn } = useAuth();
+
 	return (
 		<div>
-			<button className="button" onClick={signInWithGoogle}>
+			<button className="button" onClick={signIn}>
 				<i className="fab fa-google"></i>Sign in with google
 			</button>
 		</div>
