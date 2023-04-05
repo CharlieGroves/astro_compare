@@ -1,14 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import "./SpaceBackground.css";
+import React, { useEffect, useMemo, useRef } from "react";
+import "../css/SpaceBackground.css";
 
 function SpaceBackground() {
-	const containerRef = useRef(null);
-	const starColors = ["#ffffff", "#f5f5f5", "#eeeeee"];
-	const satelliteColors = ["#ffffff", "#f5f5f5", "#eeeeee"];
-	const trailColors = ["#ffffff", "#f5f5f5", "#eeeeee"];
+	const containerRef = useRef<HTMLDivElement>(null);
+	const satelliteColors = useMemo(
+		() => ["#ffffff", "#f5f5f5", "#eeeeee"],
+		[]
+	);
+	const trailColors = useMemo(() => ["#ffffff", "#f5f5f5", "#eeeeee"], []);
 
 	useEffect(() => {
-		const container = containerRef.current;
+		const container = containerRef.current!;
 		const width = container.offsetWidth;
 		const height = container.offsetHeight;
 
@@ -84,7 +86,7 @@ function SpaceBackground() {
 				shootingStar.remove();
 			};
 		}, 10000);
-	}, []);
+	}, [satelliteColors, trailColors]);
 	return <div className="background" ref={containerRef}></div>;
 }
 
