@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 
 export const useAuth = () => {
-	const [user, setUser] = useState<firebase.User>();
-	const [isLoading, setIsLoading] = useState<Boolean>(true);
+	const [user, setUser] = useState<firebase.User | null>();
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [authError, setAuthError] = useState<firebase.auth.Error>();
 
 	const auth = firebase.auth();
@@ -11,16 +11,11 @@ export const useAuth = () => {
 	provider.setCustomParameters({ prompt: "select_account" });
 
 	const handleUser = (user: firebase.User | null) => {
-		if (user) {
-			setUser(user);
-		} else {
-			setUser(undefined);
-		}
-
+		setUser(user);
 		setIsLoading(false);
 	};
 
-	const signIn = () => {
+	const signIn = ():void => {
 		auth.signInWithPopup(provider)
 			.then((res) => {
 				handleUser(res.user);
@@ -28,7 +23,7 @@ export const useAuth = () => {
 			.catch((error: firebase.auth.Error) => setAuthError(error));
 	};
 
-	const signOut = () => {
+	const signOut = ():void => {
 		auth.signOut().then(() => handleUser(null));
 	};
 
