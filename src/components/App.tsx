@@ -1,10 +1,11 @@
 import "../css/App.css";
 import "../css//Buttons.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 import { ToggleSlider } from "react-toggle-slider";
 import SpaceBackground from "./SpaceBackground";
 import Auth from "./Auth";
 import { useAuth } from "../hooks/useAuth";
+import Exposure from "./Exposure";
 
 function App() {
 	const { user, signOut } = useAuth();
@@ -44,8 +45,8 @@ function App() {
 	const [exposure_1, setExposure_1] = useState(0);
 	const [exposure_2, setExposure_2] = useState(0);
 
-	const [shutterSpeed_1, setshutterSpeed_1] = useState(0);
-	const [shutterSpeed_2, setshutterSpeed_2] = useState(0);
+	const [shutterSpeed_1, setShutterSpeed_1] = useState(0);
+	const [shutterSpeed_2, setShutterSpeed_2] = useState(0);
 
 	const [apeture_1, setApeture_1] = useState(1.4);
 	const [apeture_2, setApeture_2] = useState(1.4);
@@ -123,120 +124,29 @@ function App() {
 						/>
 						<div className="toggle-label">Multiple Exposures</div>
 					</div>
-					<div className="exposure-1">
-						<h3>Exposure 1</h3>
-						<label htmlFor="shutterSpeed_1">
-							Shutter Speed
-							<br />
-							<input
-								value={shutterSpeed_1}
-								onChange={(e) =>
-									setshutterSpeed_1(Number(e.target.value))
-								}
-								type="text"
-							/>
-						</label>
-						<label htmlFor="ISO_1">
-							ISO
-							<br />
-							<input
-								value={ISO_1}
-								onChange={(e) =>
-									setISO_1(Number(e.target.value))
-								}
-								type="text"
-							/>
-						</label>
-						{accountExposures && (
-							<label htmlFor="numberOfExposures_1">
-								No. Lights
-								<br />
-								<input
-									value={numberOfExposures_1}
-									onChange={(e) =>
-										setNumberOfExposures_1(
-											Number(e.target.value)
-										)
-									}
-									type="text"
-								/>
-							</label>
-						)}
-						<label htmlFor="apeture_1">
-							Apeture
-							<select
-								onChange={(e) =>
-									setApeture_1(Number(e.target.value))
-								}
-								name="apeture_1"
-								id="apeture_1"
-							>
-								{Object.entries(relative_apeture_dict).map(
-									([key]) => (
-										<option value={key}>{key}</option>
-									)
-								)}
-							</select>
-						</label>
-					</div>
+					<Exposure
+						relative_apeture_dict={relative_apeture_dict}
+						numberOfExposures={numberOfExposures_1}
+						accountExposures={accountExposures}
+						shutterSpeed={shutterSpeed_1}
+						ISO={ISO_1}
+						setNumberOfExposures={setNumberOfExposures_1}
+						setShutterSpeed={setShutterSpeed_1}
+						setApeture={setApeture_1}
+						setISO={setISO_1}
+					/>
 					<br />
-					<div className="exposure-2">
-						<h3>Exposure 2</h3>
-						<label htmlFor="shutterSpeed_2">
-							Shutter Speed
-							<br />
-							<input
-								value={shutterSpeed_2}
-								onChange={(e) =>
-									setshutterSpeed_2(Number(e.target.value))
-								}
-								type="text"
-							/>
-						</label>
-
-						<label htmlFor="ISO_2">
-							ISO
-							<br />
-							<input
-								value={ISO_2}
-								onChange={(e) =>
-									setISO_2(Number(e.target.value))
-								}
-								type="text"
-							/>
-						</label>
-						{accountExposures && (
-							<label htmlFor="numberOfExposures_2">
-								No. Lights
-								<br />
-								<input
-									value={numberOfExposures_2}
-									onChange={(e) =>
-										setNumberOfExposures_2(
-											Number(e.target.value)
-										)
-									}
-									type="text"
-								/>
-							</label>
-						)}
-						<label htmlFor="apeture_2">
-							Apeture
-							<select
-								onChange={(e) =>
-									setApeture_2(Number(e.target.value))
-								}
-								name="apeture_2"
-								id="apeture_2"
-							>
-								{Object.entries(relative_apeture_dict).map(
-									([key]) => (
-										<option value={key}>{key}</option>
-									)
-								)}
-							</select>
-						</label>
-					</div>
+					<Exposure
+						relative_apeture_dict={relative_apeture_dict}
+						numberOfExposures={numberOfExposures_2}
+						accountExposures={accountExposures}
+						shutterSpeed={shutterSpeed_2}
+						ISO={ISO_2}
+						setNumberOfExposures={setNumberOfExposures_2}
+						setShutterSpeed={setShutterSpeed_2}
+						setApeture={setApeture_2}
+						setISO={setISO_2}
+					/>
 				</form>
 				<br />
 				<br />
