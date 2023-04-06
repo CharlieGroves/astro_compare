@@ -1,46 +1,17 @@
 import "../css/App.css";
 import "../css//Buttons.css";
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { ToggleSlider } from "react-toggle-slider";
 import SpaceBackground from "./SpaceBackground";
 import Auth from "./Auth";
 import { useAuth } from "../hooks/useAuth";
 import Exposure from "./Exposure";
+import useRealtiveApetureDict from "../hooks/useRealtiveApetureDict";
 
 function App() {
 	const { user, signOut } = useAuth();
 
-	const base = 2;
-	const relative_apeture_dict: any = {
-		"1.0": base ** 0,
-		1.1: base ** (1 / 3),
-		1.2: base ** (2 / 3),
-		1.4: base ** 1,
-		1.6: base ** (1 + 1 / 3),
-		1.8: base ** (1 + 2 / 3),
-		"2.0": base ** 2,
-		2.2: base ** (2 + 1 / 3),
-		2.5: base ** (2 + 2 / 3),
-		2.8: base ** 3,
-		3.2: base ** (3 + 1 / 3),
-		3.5: base ** (3 + 2 / 3),
-		"4.0": base ** 4,
-		4.5: base ** (4 + 1 / 3),
-		"5.0": base ** (4 + 2 / 3),
-		5.6: base ** 5,
-		6.3: base ** (5 + 1 / 3),
-		7.1: base ** (5 + 2 / 3),
-		"8.0": base ** 6,
-		"9.0": base ** (6 + 1 / 3),
-		"10.0": base ** (6 + 2 / 3),
-		"11.0": base ** 7,
-		"13.0": base ** (7 + 1 / 3),
-		"14.0": base ** (7 + 2 / 3),
-		"16.0": base ** 8,
-		"18.0": base ** (8 + 1 / 3),
-		"20.0": base ** (8 + 2 / 3),
-		"22.0": base ** 9,
-	};
+	const relativeApetureDict = useRealtiveApetureDict();
 
 	const [exposure_1, setExposure_1] = useState(0);
 	const [exposure_2, setExposure_2] = useState(0);
@@ -60,11 +31,11 @@ function App() {
 
 	useEffect(() => {
 		const temp_exposure_1 =
-			(shutterSpeed_1 / relative_apeture_dict[apeture_1]) *
+			(shutterSpeed_1 / relativeApetureDict[apeture_1]) *
 			ISO_1 *
 			numberOfExposures_1;
 		const temp_exposure_2 =
-			(shutterSpeed_2 / relative_apeture_dict[apeture_2]) *
+			(shutterSpeed_2 / relativeApetureDict[apeture_2]) *
 			ISO_2 *
 			numberOfExposures_2;
 
@@ -86,7 +57,7 @@ function App() {
 	const matchExposures = () => {
 		setNumberOfExposures_2(
 			(exposure_1 / shutterSpeed_2 / ISO_2) *
-				relative_apeture_dict[apeture_2]
+			relativeApetureDict[apeture_2]
 		);
 		console.log("matched");
 	};
@@ -125,7 +96,7 @@ function App() {
 						<div className="toggle-label">Multiple Exposures</div>
 					</div>
 					<Exposure
-						relative_apeture_dict={relative_apeture_dict}
+						relativeApetureDict={relativeApetureDict}
 						numberOfExposures={numberOfExposures_1}
 						accountExposures={accountExposures}
 						shutterSpeed={shutterSpeed_1}
@@ -137,7 +108,7 @@ function App() {
 					/>
 					<br />
 					<Exposure
-						relative_apeture_dict={relative_apeture_dict}
+						relativeApetureDict={relativeApetureDict}
 						numberOfExposures={numberOfExposures_2}
 						accountExposures={accountExposures}
 						shutterSpeed={shutterSpeed_2}
@@ -172,7 +143,6 @@ function App() {
 					) : exposure_1 >= exposure_2 ? (
 						<>
 							Exposure 1 is {Math.log2(exposure_1 / exposure_2)}{" "}
-							{console.log(Math.log2(exposure_1 / exposure_2))}
 							{exposure_1 === exposure_2 * 2 ? (
 								<>stop</>
 							) : (

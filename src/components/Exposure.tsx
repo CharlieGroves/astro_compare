@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-    relative_apeture_dict: any;
+    relativeApetureDict: Record<string, number>;
 	numberOfExposures: number;
 	accountExposures: boolean;
 	shutterSpeed: number;
@@ -14,7 +14,7 @@ interface Props {
 
 export default function Exposure(props: Props) {
 	const {
-        relative_apeture_dict,
+        relativeApetureDict,
 		numberOfExposures,
 		accountExposures,
 		shutterSpeed,
@@ -65,8 +65,8 @@ export default function Exposure(props: Props) {
 					name="apeture_1"
 					id="apeture_1"
 				>
-					{Object.entries(relative_apeture_dict).map(([key]) => (
-						<option value={key}>{key}</option>
+					{Object.entries(relativeApetureDict).map(([key]) => (
+						<option key={key} value={key}>{key}</option>
 					))}
 				</select>
 			</label>
