@@ -47,45 +47,6 @@ function SpaceBackground() {
 				cluster.appendChild(star);
 			}
 		}
-		// Create shooting stars
-		setInterval(() => {
-			const shootingStar = document.createElement("div");
-			shootingStar.classList.add("shooting-star");
-			shootingStar.style.top = `${Math.random() * 100}%`;
-			shootingStar.style.left = "-5%";
-			shootingStar.style.zIndex = "10";
-
-			shootingStar.style.width = "20px";
-			shootingStar.style.height = "20px";
-			shootingStar.style.position = "absolute";
-			shootingStar.style.backgroundColor =
-				satelliteColors[
-					Math.floor(Math.random() * satelliteColors.length)
-				];
-			container.appendChild(shootingStar);
-
-			const trail = document.createElement("div");
-			trail.classList.add("trail");
-			trail.style.backgroundColor =
-				trailColors[Math.floor(Math.random() * trailColors.length)];
-			shootingStar.appendChild(trail);
-
-			const animation = shootingStar.animate(
-				[
-					{ transform: "translateX(0)" },
-					{ transform: "translateX(110%)" },
-				],
-				{
-					duration: Math.random() * 3000 + 2000,
-					easing: "linear",
-					delay: Math.random() * 5000,
-				}
-			);
-
-			animation.onfinish = () => {
-				shootingStar.remove();
-			};
-		}, 10000);
 	}, [satelliteColors, trailColors]);
 	return <div className="background" ref={containerRef}></div>;
 }

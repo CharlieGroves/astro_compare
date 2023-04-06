@@ -2,29 +2,33 @@ import { useEffect, useState } from "react";
 import firebase from "../service/firebase";
 
 export const useAuth = () => {
-	const [user, setUser] = useState<firebase.User | null>();
+	const [user, setUser] = useState<firebase.User | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
-	const [authError, setAuthError] = useState<firebase.auth.Error>();
+	const [authError, setAuthError] = useState<firebase.auth.Error | null>(
+		null
+	);
 
-	const auth = firebase.auth();
-	const provider = new firebase.auth.GoogleAuthProvider();
+	const auth: firebase.auth.Auth = firebase.auth();
+	const provider: firebase.auth.GoogleAuthProvider =
+		new firebase.auth.GoogleAuthProvider();
+
 	provider.setCustomParameters({ prompt: "select_account" });
 
-	const handleUser = (user: firebase.User | null) => {
+	const handleUser = (user: firebase.User | null): void => {
 		setUser(user);
 		setIsLoading(false);
 	};
 
-	const signIn = ():void => {
+	const signIn = (): void => {
 		auth.signInWithPopup(provider)
-			.then((res) => {
+			.then((res: firebase.auth.UserCredential): void => {
 				handleUser(res.user);
 			})
-			.catch((error: firebase.auth.Error) => setAuthError(error));
+			.catch((error: firebase.auth.Error): void => setAuthError(error));
 	};
 
-	const signOut = ():void => {
-		auth.signOut().then(() => handleUser(null));
+	const signOut = (): void => {
+		auth.signOut().then((): void => handleUser(null));
 	};
 
 	useEffect(() => {
