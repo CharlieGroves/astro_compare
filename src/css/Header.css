@@ -1,0 +1,26 @@
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -50px;
+    margin-right: 4rem;
+    margin-bottom: -50px;
+}
+
+#logo-svg {
+    width: 200px;
+    height: 200px;
+}
+
+.header-display-name {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.header-display-name-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}

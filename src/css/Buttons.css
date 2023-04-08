@@ -10,3 +10,17 @@
 .match-exposures-button:hover {
 	background-color: #2f99dab7;
 }
+
+.auth-button {
+	background: rgb(78, 86, 88);
+	border: none;
+	border-radius: 1rem;
+	height: 50px;
+	width: 100px;
+}
+
+.auth-button:hover {
+	color: white;
+	cursor: pointer;
+	border: 1px solid white;	
+}

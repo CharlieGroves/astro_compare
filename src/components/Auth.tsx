@@ -1,12 +1,17 @@
+import { PropsWithChildren } from "react";
 import { useAuth } from "../hooks/useAuth";
 
-export default function Auth() {
+interface Props {
+	children: string
+}
+
+export default function Auth(props: PropsWithChildren<Props>) {
 	const { signIn } = useAuth();
 
 	return (
 		<div>
-			<button className="button" onClick={signIn}>
-				<i className="fab fa-google"></i>Sign in with google
+			<button className="auth-button" onClick={signIn}>
+				{props.children}
 			</button>
 		</div>
 	);
