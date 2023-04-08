@@ -1,16 +1,11 @@
 import "../css/App.css";
-import "../css//Buttons.css";
+import "../css/Buttons.css";
 import { useState, useEffect } from "react";
 import { ToggleSlider } from "react-toggle-slider";
-import SpaceBackground from "./SpaceBackground";
-import Auth from "./Auth";
-import { useAuth } from "../hooks/useAuth";
 import Exposure from "./Exposure";
 import useRealtiveApetureDict from "../hooks/useRealtiveApetureDict";
 
 function App() {
-	const { user, signOut } = useAuth();
-
 	const relativeApetureDict = useRealtiveApetureDict();
 
 	const [exposure_1, setExposure_1] = useState(0);
@@ -29,7 +24,7 @@ function App() {
 	const [numberOfExposures_1, setNumberOfExposures_1] = useState(1);
 	const [numberOfExposures_2, setNumberOfExposures_2] = useState(1);
 
-	useEffect(() => {
+	useEffect((): void => {
 		const temp_exposure_1 =
 			(shutterSpeed_1 / relativeApetureDict[apeture_1]) *
 			ISO_1 *
@@ -41,8 +36,6 @@ function App() {
 
 		setExposure_1(temp_exposure_1);
 		setExposure_2(temp_exposure_2);
-
-		// eslint-disable-next-line
 	}, [
 		shutterSpeed_1,
 		shutterSpeed_2,
@@ -52,36 +45,19 @@ function App() {
 		ISO_2,
 		numberOfExposures_1,
 		numberOfExposures_2,
+		relativeApetureDict,
 	]);
 
 	const matchExposures = () => {
 		setNumberOfExposures_2(
 			(exposure_1 / shutterSpeed_2 / ISO_2) *
-			relativeApetureDict[apeture_2]
+				relativeApetureDict[apeture_2]
 		);
 		console.log("matched");
 	};
 
 	return (
 		<div className="App">
-			<header>
-				<h1>Astro Compare</h1>
-			</header>
-			<SpaceBackground />
-			{!user ? (
-				<Auth />
-			) : (
-				<>
-					<div>{user.displayName}</div>
-					<div>{user.email}</div>
-					<button
-						className="button signout"
-						onClick={() => signOut()}
-					>
-						Sign out
-					</button>
-				</>
-			)}
 			<div className="body-container">
 				<form id="exposures-container">
 					<div className="toggle-container">

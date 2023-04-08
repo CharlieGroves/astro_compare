@@ -12,10 +12,19 @@ body {
 		radial-gradient(white 5%, transparent 5%) 100px 100px;
 	background-size: 100px 100px;
 	background-color: #040c1b;
-	overflow-x: hidden!important;
+	overflow-x: hidden !important;
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
+}
+
+@font-face {
+	font-family: Baumans;
+	src: url(../fonts/Baumans-Regular.ttf);
+}
+
+#logo {
+	font-family: Baumans;
 }

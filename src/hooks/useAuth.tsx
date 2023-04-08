@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
-import firebase from "../service/firebase";
+import { useCallback, useEffect, useState } from "react";
+import firebase, { db } from "../service/firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 export const useAuth = () => {
+	const userRef = collection(db, "users");
 	const [user, setUser] = useState<firebase.User | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [authError, setAuthError] = useState<firebase.auth.Error | null>(
@@ -14,10 +16,21 @@ export const useAuth = () => {
 
 	provider.setCustomParameters({ prompt: "select_account" });
 
-	const handleUser = (user: firebase.User | null): void => {
-		setUser(user);
-		setIsLoading(false);
-	};
+	const handleUser = useCallback(
+		(user: firebase.User | null): void => {
+			console.log("handle user", user);
+			setIsLoading(false);
+			setUser(user);
+
+			user && setDoc(doc(userRef, user.uid), {
+				displayName: user.displayName,
+				photoURL: user.photoURL,
+				uid: user.uid,
+				email: user.email,
+			});
+		},
+		[userRef]
+	);
 
 	const signIn = (): void => {
 		auth.signInWithPopup(provider)
@@ -32,9 +45,10 @@ export const useAuth = () => {
 	};
 
 	useEffect(() => {
-		const unsubscribe = auth.onIdTokenChanged(handleUser);
+		console.log("unsubscribe")
+		const unsubscribe = auth.onIdTokenChanged((user) => handleUser(user));
 		return () => unsubscribe();
-	}, []);
+	}, [auth, handleUser]);
 
 	return { user, isLoading, authError, signIn, signOut };
 };
