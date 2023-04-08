@@ -1,20 +1,7 @@
-import React, {
-	PropsWithChildren,
-	useEffect,
-	useState,
-	useCallback,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 import { useDB } from "../hooks/useDB";
-import "../css/Account.css";
 import { DocumentData } from "firebase/firestore";
-
-interface matchParams {
-	match: {
-		params: {
-			uid: string;
-		};
-	};
-}
 
 interface userDataInterface {
 	displayName: string;
@@ -24,55 +11,32 @@ interface userDataInterface {
 	description: string | null;
 }
 
-export default function Account(props: PropsWithChildren<matchParams>) {
-	const { uid } = props.match.params;
+export default function Account() {
+	const { user } = useAuth();
 	const { getUserByUID } = useDB();
 
 	const [userData, setUserData] = useState<
 		userDataInterface | DocumentData | undefined
 	>();
-	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	const getUserData = useCallback(async () => {
-		let a = (await getUserByUID(uid)).data();
+		let a = (await getUserByUID(user!.uid)).data();
 		setUserData(a);
-		setIsLoading(false);
-	}, [uid, getUserByUID]);
+	}, [user, getUserByUID]);
 
 	useEffect(() => {
-		!userData && isLoading && getUserData();
+		user && getUserData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userData]);
+	}, [user]);
 
 	return (
-		<div id="account-container">
-			{isLoading ? (
-				<div>loading</div>
+		<div>
+			{userData ? (
+				<div>{userData.displayName}'s</div>
 			) : (
-				<div>
-					{userData ? (
-						<div id="user-profile-container">
-							<img
-								src={`${userData.photoURL}`}
-								alt={`${userData.displayName}'s profile`}
-								id="user-profile-image"
-							/>
-							<div id="user-profile-data-container">
-								<div id="user-profile-display-name">
-									{userData.displayName}
-								</div>
-								{userData.description && (
-									<div id="user-profile-description">
-										{userData.description}
-									</div>
-								)}
-							</div>
-						</div>
-					) : (
-						<div>No data</div>
-					)}
-				</div>
+				<div>loading...</div>
 			)}
+			Account
 		</div>
 	);
 }

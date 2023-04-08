@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "../css/Header.css";
 import "../css/Dropdown.css";
+import { getAuth } from "firebase/auth";
 
 export default function Header() {
-	const { user, signOut } = useAuth();
+	const { signOut } = useAuth();
+	const auth = getAuth()
+	const user = auth.currentUser;
 
 	return (
 		<header id="header">

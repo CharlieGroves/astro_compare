@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import firebase, { db } from "../service/firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, updateDoc } from "firebase/firestore";
 
 export const useAuth = () => {
 	const userRef = collection(db, "users");
@@ -19,15 +19,15 @@ export const useAuth = () => {
 	const handleUser = useCallback(
 		(user: firebase.User | null): void => {
 			console.log("handle user", user);
-			setIsLoading(false);
 			setUser(user);
-
-			user && setDoc(doc(userRef, user.uid), {
+			
+			user && updateDoc(doc(userRef, user.uid), {
 				displayName: user.displayName,
 				photoURL: user.photoURL,
 				uid: user.uid,
 				email: user.email,
 			});
+			setIsLoading(false);
 		},
 		[userRef]
 	);
@@ -49,6 +49,8 @@ export const useAuth = () => {
 		const unsubscribe = auth.onIdTokenChanged((user) => handleUser(user));
 		return () => unsubscribe();
 	}, [auth, handleUser]);
+
+	console.log(user)
 
 	return { user, isLoading, authError, signIn, signOut };
 };
