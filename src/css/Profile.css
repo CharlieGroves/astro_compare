@@ -28,3 +28,7 @@
     justify-content: flex-start;
     flex-direction: column;
 }
+
+#profile-description-editing-box > svg:hover {
+    cursor: pointer;
+}
