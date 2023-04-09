@@ -12,9 +12,11 @@
 }
 
 .auth-button {
-	background: rgb(78, 86, 88);
+	background: black;
+	border-radius: 2rem;
 	border: none;
-	border-radius: 1rem;
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+	color: white;
 	height: 50px;
 	width: 100px;
 }
