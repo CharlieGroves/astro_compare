@@ -12,23 +12,31 @@
 	box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-#account-container {
-    display: flex;
-    justify-content: center;
+@media (max-width: 500px) {
+	#user-profile-container {
+		flex-direction: column;
+	}
+}
+
+#profile-container {
+	display: flex;
+	justify-content: center;
+	margin-left: 1rem;
+	margin-right: 1rem;
 }
 
 #user-profile-display-name {
-    font-weight: bold;
-    font-size: 48px;
+	font-weight: bold;
+	font-size: 48px;
 }
 
 #user-profile-data-container {
-    margin: 1rem;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
+	margin: 1rem;
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
 }
 
 #profile-description-editing-box > svg:hover {
-    cursor: pointer;
+	cursor: pointer;
 }

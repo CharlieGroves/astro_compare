@@ -7,6 +7,12 @@
     margin-bottom: -50px;
 }
 
+@media (max-width: 500px) {
+    .header-display-name-div {
+        flex-direction: column;
+    }
+}
+
 #logo-svg {
     width: 200px;
     height: 200px;
