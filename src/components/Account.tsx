@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useDB } from "../hooks/useDB";
 import { DocumentData } from "firebase/firestore";
+import { useHistory } from "react-router-dom";
 
 interface userDataInterface {
 	displayName: string;
@@ -13,7 +14,11 @@ interface userDataInterface {
 
 export default function Account() {
 	const { user } = useAuth();
-	const { getUserByUID } = useDB();
+	const { getUserByUID, deleteAccount } = useDB();
+	const history = useHistory();
+
+	const [wantToDelete, setWantToDelete] = useState(false);
+	const [accountBeingDeleted, setAccountBeingDeleted] = useState(false);
 
 	const [userData, setUserData] = useState<
 		userDataInterface | DocumentData | undefined
@@ -29,14 +34,49 @@ export default function Account() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user]);
 
+	const deleteAccountHandler = () => {
+		history.push("/");
+		deleteAccount(userData!.uid, setAccountBeingDeleted);
+	};
+
 	return (
 		<div>
 			{userData ? (
-				<div>{userData.displayName}'s</div>
+				<div>
+					<div id="delete-account-container">
+						{!wantToDelete ? (
+							<div
+								onClick={() => setWantToDelete(true)}
+								id="delete-account-button"
+								className="delete-button"
+							>
+								Delete Account
+							</div>
+						) : (
+							<div id="delete-account-confirm-container">
+								Are you sure?
+								<button
+									disabled={accountBeingDeleted}
+									onClick={() => deleteAccountHandler()}
+									id="go-back-delete-account"
+									className="delete-button"
+								>
+									Yes
+								</button>
+								<div
+									onClick={() => setWantToDelete(false)}
+									id="confim-delete-account"
+									className="delete-button"
+								>
+									Go back
+								</div>
+							</div>
+						)}
+					</div>
+				</div>
 			) : (
 				<div>loading...</div>
 			)}
-			Account
 		</div>
 	);
 }

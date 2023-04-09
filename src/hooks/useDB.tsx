@@ -6,10 +6,14 @@ import {
 	getDoc,
 	updateDoc,
 	collection,
+	deleteDoc,
 } from "firebase/firestore";
+import { useAuth } from "./useAuth";
+import { Redirect } from "react-router-dom";
 
 export function useDB() {
 	const userRef = collection(db, "users");
+	const { signOut } = useAuth();
 
 	const getUserByUID = async (
 		uid: string
@@ -28,5 +32,16 @@ export function useDB() {
 		});
 	};
 
-	return { getUserByUID, updateUserDescriptionByUID };
+	const deleteAccount = async (
+		uid: string,
+		setAccountBeingDeleted: React.Dispatch<React.SetStateAction<boolean>>
+	) => {
+		setAccountBeingDeleted(true);
+		console.log("deleting...");
+		signOut();
+		await deleteDoc(doc(userRef, uid));
+		setAccountBeingDeleted(false);
+	};
+
+	return { getUserByUID, updateUserDescriptionByUID, deleteAccount };
 }

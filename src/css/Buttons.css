@@ -11,7 +11,7 @@
 	background-color: #2f99dab7;
 }
 
-.auth-button {
+.auth-button, .delete-button {
 	background: black;
 	border-radius: 2rem;
 	border: none;
@@ -21,8 +21,23 @@
 	width: 100px;
 }
 
-.auth-button:hover {
+.auth-button:hover, .delete-button:hover {
 	color: white;
 	cursor: pointer;
 	border: 1px solid white;	
+}
+
+.delete-button {
+	display: flex;
+	justify-content: center;
+	margin-left: 1rem;
+	align-items: center;
+	text-align: center;
+}
+
+#delete-account-confirm-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-left: 1rem;
 }
