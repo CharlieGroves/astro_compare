@@ -11,8 +11,8 @@ function App() {
 	const [exposure_1, setExposure_1] = useState(0);
 	const [exposure_2, setExposure_2] = useState(0);
 
-	const [shutterSpeed_1, setShutterSpeed_1] = useState(0);
-	const [shutterSpeed_2, setShutterSpeed_2] = useState(0);
+	const [shutterSpeed_1, setShutterSpeed_1] = useState("0");
+	const [shutterSpeed_2, setShutterSpeed_2] = useState("0");
 
 	const [apeture_1, setApeture_1] = useState(1.4);
 	const [apeture_2, setApeture_2] = useState(1.4);
@@ -26,11 +26,11 @@ function App() {
 
 	useEffect((): void => {
 		const temp_exposure_1 =
-			(shutterSpeed_1 / relativeApetureDict[apeture_1]) *
+			(Number(shutterSpeed_1) / relativeApetureDict[apeture_1]) *
 			ISO_1 *
 			numberOfExposures_1;
 		const temp_exposure_2 =
-			(shutterSpeed_2 / relativeApetureDict[apeture_2]) *
+			(Number(shutterSpeed_2) / relativeApetureDict[apeture_2]) *
 			ISO_2 *
 			numberOfExposures_2;
 
@@ -50,7 +50,7 @@ function App() {
 
 	const matchExposures = () => {
 		setNumberOfExposures_2(
-			(exposure_1 / shutterSpeed_2 / ISO_2) *
+			(exposure_1 / Number(shutterSpeed_2) / ISO_2) *
 				relativeApetureDict[apeture_2]
 		);
 		console.log("matched");

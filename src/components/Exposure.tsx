@@ -4,10 +4,10 @@ interface Props {
     relativeApetureDict: Record<string, number>;
 	numberOfExposures: number;
 	accountExposures: boolean;
-	shutterSpeed: number;
+	shutterSpeed: string;
 	ISO: number;
 	setNumberOfExposures: React.Dispatch<React.SetStateAction<number>>;
-	setShutterSpeed: React.Dispatch<React.SetStateAction<number>>;
+	setShutterSpeed: React.Dispatch<React.SetStateAction<string>>;
     setApeture: React.Dispatch<React.SetStateAction<number>>;
 	setISO: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -32,7 +32,7 @@ export default function Exposure(props: Props) {
 				<br />
 				<input
 					value={shutterSpeed}
-					onChange={(e) => setShutterSpeed(Number(e.target.value))}
+					onChange={(e) => setShutterSpeed(e.target.value)}
 					type="text"
 				/>
 			</label>
