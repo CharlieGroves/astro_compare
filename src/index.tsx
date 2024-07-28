@@ -7,6 +7,7 @@ import SpaceBackground from "./components/SpaceBackground";
 import App from "./components/App";
 import Profile from "./components/Profile";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Account from "./components/Account";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
@@ -21,6 +22,7 @@ root.render(
 				<Route path="/account/" component={Account} />
 				<Route exact path="/" component={App} />
 			</Switch>
+			<Footer />
 		</Router>
 	</React.StrictMode>
 );
